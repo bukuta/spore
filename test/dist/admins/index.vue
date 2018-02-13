@@ -77,6 +77,9 @@
 <script>
 import BaseCollection from '$models/collection';
 import { MessageBox } from 'element-ui';
+import {Creator} from '$model-data-shape'; //表单生成器
+import {CreateShape, EditShape} from '$shapes/admins';
+import {AdminModel} from '$entities/Admin';
 import {Detail} from './detail';
 export default {
   name: "admins_list",
@@ -130,9 +133,14 @@ export default {
       this.collection.setParams(data);
       this.fetchItems();
     },
-    _onCreate(data){
+    _onCreate(){
+      Creator(AdminModel,CreateShape,{}).then(data=>{
+        return this._doCreate(data);
+      });
+    },
+    _doCreate(data){
       this.status.create = 'creating'
-      this.collection.create(data).then(rs=>{
+      return this.collection.create(data).then(rs=>{
         this.status.create = 'created';
         this.error.create = null;
         this.errorMessage.create = '';

@@ -99,6 +99,7 @@ async function test() {
         };
       },
     },
+    modelName: name,
   };
 
   let content = await Spore.generateListPage({

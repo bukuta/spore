@@ -1,3 +1,4 @@
+<% var modelName = options.modelName[0].toUpperCase()+options.modelName.slice(1)%>
 <template>
   <div class="list-<%=name%>">
     <%if(searchForm){%>
@@ -76,6 +77,9 @@
 <script>
 import BaseCollection from '$models/collection';
 import { MessageBox } from 'element-ui';
+import {Creator} from '$model-data-shape'; //表单生成器
+import {CreateShape, EditShape} from '$shapes/<%=name%>';
+import {<%=modelName%>Model} from '$entities/<%=modelName%>';
 
 import {Detail} from './detail';
 
@@ -138,9 +142,14 @@ export default {
       this.collection.setParams(data);
       this.fetchItems();
     },
-    _onCreate(data){
+    _onCreate(){
+      Creator(<%=modelName%>Model,CreateShape,{}).then(data=>{
+        return this._doCreate(data);
+      });
+    },
+    _doCreate(data){
       this.status.create = 'creating'
-      this.collection.create(data).then(rs=>{
+      return this.collection.create(data).then(rs=>{
         this.status.create = 'created';
         this.error.create = null;
         this.errorMessage.create = '';
