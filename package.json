@@ -1,0 +1,19 @@
+{
+  "name": "spore",
+  "version": "1.0.0",
+  "description": "> 孢子，单细胞，有丝分裂",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bukuta@github.com/bukuta/spore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bukuta/spore/issues"
+  },
+  "homepage": "https://github.com/bukuta/spore#readme"
+}
