@@ -2,9 +2,9 @@
   "name": "spore",
   "version": "1.0.0",
   "description": "> 孢子，单细胞，有丝分裂",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=* node test/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/bukuta/spore/issues"
   },
-  "homepage": "https://github.com/bukuta/spore#readme"
+  "homepage": "https://github.com/bukuta/spore#readme",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "js-beautify": "^1.7.5",
+    "js-yaml": "^3.10.0",
+    "lodash": "^4.17.5",
+    "pug": "^2.0.0-rc.4"
+  }
 }
