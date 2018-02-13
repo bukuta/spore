@@ -178,19 +178,16 @@ export default {
       });
     },
     _onShowDetail(item){
-      let message = <Detail detail={item}></Detail>;
-      MessageBos({
-        title: '管理员详情',
-        message: message,
-        showCancelButton: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        beforeClose: (action, instance, done) => {
-          done();
-        },
-      }).then(rs=>{
-      },err=>{
-      });
+      let routeFun = function route(item) {
+        return {
+          name: 'adminDetail',
+          params: {
+            adminId: item.id,
+          },
+        };
+      };
+      let route = routeFun.call(this,item);
+      this.$router.push(route);
     },
     _handleSizeChange(newSize){
       this.collection.pageSize = newSize;

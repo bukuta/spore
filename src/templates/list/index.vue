@@ -186,6 +186,7 @@ export default {
       });
     },
     _onShowDetail(item){
+    <%if(options&&options.showDetail&&options.showDetail=='dialog'){%>
       let message = <Detail detail={item}></Detail>;
       MessageBos({
         title: '<%=model.description%>详情',
@@ -199,6 +200,11 @@ export default {
       }).then(rs=>{
       },err=>{
       });
+    <%}else if (options&&options.showDetail.route&&_.isFunction(options.showDetail.route)){%>
+      let routeFun = <%=options.showDetail.route.toString()%>;
+      let route = routeFun.call(this,item);
+      this.$router.push(route);
+    <%}%>
     },
     _handleSizeChange(newSize){
       this.collection.pageSize = newSize;

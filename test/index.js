@@ -34,40 +34,87 @@ async function test() {
   model = Object.values(model)[0];
 
   let fields = [
-    { type: 'selection' },
-    { type: 'index' },
-    { name: 'id', label: 'ID' },
-    { name: 'name', label: '名字' },
-    { name: 'status', label: '状态' },
-    { name: 'updateAt', label: '更新时间' },
-    { label: '操作' },
+    {
+      type: 'selection'
+    },
+    {
+      type: 'index'
+    },
+    {
+      name: 'id',
+      label: 'ID'
+    },
+    {
+      name: 'name',
+      label: '名字'
+    },
+    {
+      name: 'status',
+      label: '状态'
+    },
+    {
+      name: 'updateAt',
+      label: '更新时间'
+    },
+    {
+      label: '操作'
+    },
   ];
 
   let searchForm = [
-    {type: 'select',name:'status',label:'状态',placeholder:'状态'},
-    {type: 'text',name:'name',label:'名字',placeholder:'名字'},
-    {type: 'switch',name:'online',label:'性别',placeholder:'性别'},
+    {
+      type: 'select',
+      name: 'status',
+      label: '状态',
+      placeholder: '状态'
+    },
+    {
+      type: 'text',
+      name: 'name',
+      label: '名字',
+      placeholder: '名字'
+    },
+    {
+      type: 'switch',
+      name: 'online',
+      label: '性别',
+      placeholder: '性别'
+    },
   ];
 
   let pagination = {
     layout: "total, prev, pager, next",
-    pageSizes:[10, 20, 30, 40],
-    pageSize:10,
+    pageSizes: [10, 20, 30, 40],
+    pageSize: 10,
+  };
+
+  let options = {
+    showDetail: {
+      route: function route(item) {
+        return {
+          name: 'adminDetail',
+          params: {
+            adminId: item.id,
+          },
+        };
+      },
+    },
   };
 
   let content = await Spore.generateListPage({
     name: 'admins',
     model,
-    shape:fields,
+    shape: fields,
     path: '/admins',
-    searchForm:searchForm,
+    searchForm: searchForm,
     pagination,
+    options,
   });
   debug('code');
   debug(content);
-  let distpath = path.join(__dirname,'dist',name+'s');
+  let distpath = path.join(__dirname, 'dist', name + 's');
   await mkdirp(distpath)
-  await writeFile(path.join(distpath,'index.vue'),content);
+  await writeFile(path.join(distpath, 'index.vue'), content);
 
 }
 
