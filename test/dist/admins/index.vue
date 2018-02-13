@@ -77,6 +77,7 @@
 <script>
 import BaseCollection from '$models/collection';
 import { MessageBox } from 'element-ui';
+import {Detail} from './detail';
 export default {
   name: "admins_list",
   data(){
@@ -129,7 +130,7 @@ export default {
       this.collection.setParams(data);
       this.fetchItems();
     },
-    onCreate(data){
+    _onCreate(data){
       this.status.create = 'creating'
       this.collection.create(data).then(rs=>{
         this.status.create = 'created';
@@ -141,7 +142,7 @@ export default {
         this.errorMessage.create = err.message;
       });
     },
-    onDelete(item){
+    _onDelete(item){
       let id = item.id;
       MessageBos({
         title: '警告',
@@ -171,6 +172,21 @@ export default {
           } else {
             done();
           }
+        },
+      }).then(rs=>{
+      },err=>{
+      });
+    },
+    _onShowDetail(item){
+      let message = <Detail detail={item}></Detail>;
+      MessageBos({
+        title: '管理员详情',
+        message: message,
+        showCancelButton: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          done();
         },
       }).then(rs=>{
       },err=>{
