@@ -1,0 +1,14 @@
+收集参数需求
+```javascript
+{
+  data:{
+    table:{
+      name,
+      description,
+      primaryKey,
+    },
+    fields:[
+    ]
+  }
+}
+```
